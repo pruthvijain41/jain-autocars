@@ -1,84 +1,99 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Twitter, MapPin, Phone, Mail, ArrowRight } from 'lucide-react';
+import { Facebook, Instagram, Youtube, MessageCircle, ArrowRight } from 'lucide-react';
+
+const Eyebrow = ({ children }) => (
+    <span className="inline-flex items-center gap-2 font-mono uppercase tracking-[0.18em] text-[10.5px] text-ivory/70">
+        <span className="inline-block w-4 h-px bg-ivory/40" />
+        {children}
+    </span>
+);
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="bg-slate-100 pt-16 pb-8 border-t border-slate-200">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-                    {/* Brand Info */}
-                    <div className="space-y-4">
-                        <div className="flex items-center gap-2">
-                            <div className="bg-primary text-white p-1.5 rounded-md">
-                                <span className="font-heading font-bold text-lg tracking-tighter">JA</span>
-                            </div>
-                            <span className="font-heading font-bold text-xl text-slate-900">Jain Autocars</span>
-                        </div>
-                        <p className="text-slate-500 text-sm leading-relaxed">
-                            Your trusted destination for premium pre-owned vehicles in Mysore. Quality, transparency, and customer satisfaction are our top priorities.
+        <footer className="bg-ink text-ivory">
+            <div className="max-w-[1480px] mx-auto px-6 md:px-12 pt-20 pb-10">
+                <div className="grid md:grid-cols-12 gap-10">
+                    <div className="md:col-span-5">
+                        <Link to="/" className="flex items-center gap-2.5">
+                            <span className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-ivory/30">
+                                <span className="font-display text-[20px] leading-none">J</span>
+                            </span>
+                            <span className="font-display text-[24px] leading-none">Jain Autocars</span>
+                        </Link>
+                        <p className="mt-5 max-w-md text-[14px] text-ivory/65 leading-relaxed">
+                            Mysore's most-trusted name in pre-owned cars since 2011. A family-run dealership built on
+                            one rule — sell the kind of car we would put our own family in.
                         </p>
-                        <div className="flex gap-4 pt-2">
-                            <a href="#" className="text-slate-400 hover:text-primary transition-colors"><Facebook size={20} /></a>
-                            <a href="#" className="text-slate-400 hover:text-primary transition-colors"><Instagram size={20} /></a>
-                            <a href="#" className="text-slate-400 hover:text-primary transition-colors"><Twitter size={20} /></a>
+                        <div className="mt-6 flex items-center gap-3">
+                            {[
+                                { name: 'Instagram', Icon: Instagram, href: '#' },
+                                { name: 'Facebook', Icon: Facebook, href: '#' },
+                                { name: 'YouTube', Icon: Youtube, href: '#' },
+                                { name: 'WhatsApp', Icon: MessageCircle, href: 'https://wa.me/919986619282' },
+                            ].map(({ name, Icon, href }) => (
+                                <a
+                                    key={name}
+                                    href={href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={name}
+                                    className="w-9 h-9 rounded-full border border-ivory/15 hover:border-ivory/40 flex items-center justify-center transition-colors"
+                                >
+                                    <Icon size={14} />
+                                </a>
+                            ))}
                         </div>
                     </div>
 
-                    {/* Quick Links */}
-                    <div>
-                        <h3 className="font-heading font-bold text-slate-900 mb-6">Quick Links</h3>
-                        <ul className="space-y-3">
-                            <li><Link to="/" className="text-slate-500 hover:text-primary transition-colors text-sm">Home</Link></li>
-                            <li><Link to="/used-cars-in-mysore" className="text-slate-500 hover:text-primary transition-colors text-sm">Browse Inventory</Link></li>
-                            <li><Link to="/contact" className="text-slate-500 hover:text-primary transition-colors text-sm">Contact Us</Link></li>
-                            <li><Link to="/admin/login" className="text-slate-500 hover:text-primary transition-colors text-sm">Admin Login</Link></li>
+                    <div className="md:col-span-2">
+                        <Eyebrow>Shop</Eyebrow>
+                        <ul className="mt-4 space-y-2.5 text-[13.5px] text-ivory/75">
+                            <li><Link to="/used-cars-in-mysore" className="link-u">All cars</Link></li>
+                            <li><Link to="/used-cars-in-mysore?bodyType=SUV" className="link-u">SUVs</Link></li>
+                            <li><Link to="/used-cars-in-mysore?bodyType=Sedan" className="link-u">Sedans</Link></li>
+                            <li><Link to="/used-cars-in-mysore?priceMax=1000000" className="link-u">Under ₹10L</Link></li>
+                            <li><Link to="/favorites" className="link-u">Saved cars</Link></li>
                         </ul>
                     </div>
 
-                    {/* Contact Info */}
-                    <div>
-                        <h3 className="font-heading font-bold text-slate-900 mb-6">Contact Us</h3>
-                        <ul className="space-y-4">
-                            <li className="flex items-start gap-3 text-slate-500 text-sm">
-                                <MapPin size={18} className="text-primary shrink-0 mt-0.5" />
-                                <span>480, Chithrabhanu Rd, Kuvempu Nagara, Mysuru, Karnataka 570023</span>
-                            </li>
-                            <li className="flex items-center gap-3 text-slate-500 text-sm">
-                                <Phone size={18} className="text-primary shrink-0" />
-                                <a href="tel:+919986619282" className="hover:text-primary transition-colors">+91 99866 19282</a>
-                            </li>
-                            <li className="flex items-center gap-3 text-slate-500 text-sm">
-                                <Mail size={18} className="text-primary shrink-0" />
-                                <a href="mailto:crsurajjain@gmail.com" className="hover:text-primary transition-colors">crsurajjain@gmail.com</a>
-                            </li>
+                    <div className="md:col-span-2">
+                        <Eyebrow>Company</Eyebrow>
+                        <ul className="mt-4 space-y-2.5 text-[13.5px] text-ivory/75">
+                            <li><Link to="/contact" className="link-u">Contact</Link></li>
+                            <li><Link to="/contact" className="link-u">Visit showroom</Link></li>
+                            <li><Link to="/used-cars-in-mysore" className="link-u">Inventory</Link></li>
+                            <li><Link to="/admin/login" className="link-u">Admin</Link></li>
                         </ul>
                     </div>
 
-                    {/* Newsletter */}
-                    <div>
-                        <h3 className="font-heading font-bold text-slate-900 mb-6">Stay Updated</h3>
-                        <p className="text-slate-500 text-sm mb-4">Subscribe to our newsletter for the latest arrivals and offers.</p>
-                        <form className="flex gap-2">
+                    <div className="md:col-span-3">
+                        <Eyebrow>Stay in the loop</Eyebrow>
+                        <p className="mt-4 text-[13.5px] text-ivory/65">Fresh arrivals every Friday. No spam, no marketing fluff.</p>
+                        <form
+                            className="mt-4 flex items-center gap-1 rounded-full border border-ivory/15 bg-ivory/5 pl-4 pr-1 py-1"
+                            onSubmit={(e) => e.preventDefault()}
+                        >
                             <input
                                 type="email"
-                                placeholder="Your email"
-                                className="bg-white border border-slate-200 text-slate-900 text-sm rounded-lg px-4 py-2 w-full focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                                placeholder="you@example.com"
+                                className="flex-1 bg-transparent text-[13.5px] py-2 placeholder:text-ivory/35 outline-none border-0 focus:ring-0"
                             />
-                            <button type="submit" className="bg-primary hover:bg-primary-hover text-white p-2 rounded-lg transition-colors">
-                                <ArrowRight size={20} />
+                            <button type="submit" aria-label="Subscribe" className="w-9 h-9 rounded-full bg-ivory text-ink flex items-center justify-center hover:bg-champagne transition-colors">
+                                <ArrowRight size={14} />
                             </button>
                         </form>
                     </div>
                 </div>
 
-                <div className="border-t border-slate-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p className="text-slate-400 text-sm">© {currentYear} Jain Autocars. All rights reserved.</p>
-                    <div className="flex gap-6 text-sm text-slate-400">
-                        <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-                        <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
+                <div className="mt-16 pt-6 border-t border-ivory/10 flex flex-col md:flex-row md:items-center justify-between gap-3 text-[12px] text-ivory/45 font-mono uppercase tracking-[0.18em]">
+                    <div>© {currentYear} Jain Autocars · Kuvempu Nagara, Mysore</div>
+                    <div className="flex items-center gap-6">
+                        <a href="#" className="link-u">Privacy</a>
+                        <a href="#" className="link-u">Terms</a>
+                        <a href="#" className="link-u">Sitemap</a>
                     </div>
                 </div>
             </div>

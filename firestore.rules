@@ -12,18 +12,22 @@ service cloud.firestore {
       allow read, update, delete: if request.auth != null;
     }
 
-    // --- THIS IS THE NEW RULE BLOCK THAT FIXES THE ERROR ---
-    match /testimonials/{testimonialId} {
-      // Allow anyone to submit (create) a new testimonial.
+    match /testDrives/{testDriveId} {
       allow create;
-      
-      // Only allow reading testimonials if they have been approved by an admin.
-      allow read: if resource.data.approved == true;
-      
-      // Only allow authenticated admins to update (approve) or delete testimonials.
+      allow read, update, delete: if request.auth != null;
+    }
+
+    match /testimonials/{testimonialId} {
+      // Allow anyone to submit a new testimonial.
+      allow create;
+
+      // Public users can only read approved testimonials.
+      // Authenticated admins can read all (including pending).
+      allow read: if request.auth != null || resource.data.approved == true;
+
+      // Only authenticated admins can update or delete testimonials.
       allow update, delete: if request.auth != null;
     }
-    // ----------------------------------------------------
 
     match /showroomInfo/{docId} {
       allow read;
